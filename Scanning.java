@@ -13,24 +13,6 @@ public class Scanning {
     allPlaces.add("Tambi");
     allPlaces.add("Straylight");
 
-    // Scanner scan = new Scanner(System.in);
-    // while (scan.hasNextLine()) {
-    //   String lineScan = scan.nextLine();
-    //
-    //   String[] sentenceToArray = lineScan.split(" "); //[Faerun,toNorrath,=,129]
-    //
-    //   if (!allPlaces.contains(sentenceToArray[0])) {
-    //     allPlaces.add(sentenceToArray[0]);
-    //   }
-    //   if (!allPlaces.contains(sentenceToArray[2])) {
-    //     allPlaces.add(sentenceToArray[2]);
-    //   }
-    // }
-    //
-    // // for (int i = 0; i < allPlaces.size(); i++) {
-    // //   System.out.println(allPlaces.get(i));
-    // // }
-
     int[][] distances = new int[allPlaces.size()][allPlaces.size()];
 
     Scanner scan2 = new Scanner(System.in);
