@@ -2,40 +2,34 @@ import java.util.*;
 import java.io.*;
 
 public class TravelingSalesmen {
-	public static void main(String[] args) throws FileNotFoundException {
-		Scanner in = new Scanner(new File("cities.txt"));
-		ArrayList<String> cities = new ArrayList<>(); //result
-		
-		while(in.hasNextLine()) {
-			Scanner column = new Scanner(in.nextLine());
-			String from = column.next(); //first column
-			//System.out.println(from);
-			column.next(); //skip over column w "to"
-			String to = column.next(); //second column
-			//System.out.println(to);
+  public static void main(String[] args) throws FileNotFoundException {
+    Scanner in = new Scanner(new File("cities.txt"));
+    ArrayList<String> cities = new ArrayList<>(); //result
 
-			if(!cities.contains(from)) cities.add(from);
-			if(!cities.contains(to)) cities.add(to); //adding cities that aren't alr in the arraylist
-		}
-		//System.out.println(cities);
+    while(in.hasNextLine()) {
+      Scanner column = new Scanner(in.nextLine());
+      String from = column.next();
+      column.next();
+      String to = column.next();
 
-		int size = cities.size();
-		int[][] distances = new int[size][size];
+      if(!cities.contains(from)) cities.add(from);
+      if(!cities.contains(to)) cities.add(to);
+    }
 
-		in = new Scanner(new File("cities.txt"));
-		while(in.hasNextLine()) {
-			Scanner column = new Scanner(in.nextLine());
-			String to = column.next();
-			column.next(); //skip over column w "to"
-			String from = column.next();
-			column.next(); //skip over column w "="
-			int distance = column.nextInt();
-			//System.out.println(cost);
+    int[][] distances = new int[cities.size()][cities.size()];
 
-			distances[cities.indexOf(to)][cities.indexOf(from)] = distance;
-			System.out.println(distances.toString());
+    Scanner scan2 = new Scanner(new File("cities.txt"));
+    while (scan2.hasNextLine()) {
+      String lineScan2 = scan2.nextLine();
 
-		}
+      String[] sentenceToArray = lineScan2.split(" ");
 
-	}
+      distances[cities.indexOf(sentenceToArray[0])]
+                [cities.indexOf(sentenceToArray[2])]
+                = Integer.parseInt(sentenceToArray[4]);
+      distances[cities.indexOf(sentenceToArray[2])]
+                [cities.indexOf(sentenceToArray[0])]
+                = Integer.parseInt(sentenceToArray[4]);
+    }
+  }
 }
