@@ -1,31 +1,35 @@
 import java.util.*;
+import java.io.*;
 
 public class Distance {
-  public static void main(String[] args) {
-    ArrayList<ArrayList<Integer>> distances = new ArrayList<ArrayList<Integer>>();
-    ArrayList<String> allPlaces = new ArrayList<String>();
+  public static void main(String[] args) throws FileNotFoundException {
+    Scanner in = new Scanner(new File("cities.txt"));
+    ArrayList<String> cities = new ArrayList<>(); //result
 
-    Scanner scan = new Scanner(System.in);
-    while (scan.hasNextLine()) {
-      String lineScan = scan.nextLine();
-      String[] placesAndDistance = lineScan.split(" = ");
-      String[] places = placesAndDistance[0].split(" to ");
+    while(in.hasNextLine()) {
+      Scanner column = new Scanner(in.nextLine());
+      String from = column.next();
+      column.next();
+      String to = column.next();
+
+      if(!cities.contains(from)) cities.add(from);
+      if(!cities.contains(to)) cities.add(to);
     }
 
-    int[][] distances = new int[allPlaces.size()][allPlaces.size()];
+    int[][] distances = new int[cities.size()][cities.size()];
 
-    Scanner scan2 = new Scanner(System.in);
+    Scanner scan2 = new Scanner(new File("cities.txt"));
     while (scan2.hasNextLine()) {
       String lineScan2 = scan2.nextLine();
 
       String[] sentenceToArray = lineScan2.split(" ");
 
-      distances[allPlaces.indexOf(sentenceToArray[0])]
-                [allPlaces.indexOf(sentenceToArray[2])]
+      distances[cities.indexOf(sentenceToArray[0])]
+                [cities.indexOf(sentenceToArray[2])]
                 = Integer.parseInt(sentenceToArray[4]);
-      distances[allPlaces.indexOf(sentenceToArray[2])]
-                [allPlaces.indexOf(sentenceToArray[0])]
+      distances[cities.indexOf(sentenceToArray[2])]
+                [cities.indexOf(sentenceToArray[0])]
                 = Integer.parseInt(sentenceToArray[4]);
-      }
+    }
   }
 }
