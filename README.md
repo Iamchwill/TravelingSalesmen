@@ -5,3 +5,28 @@ Mathematical method:
 
 Parsing:
 if city isn't in array, add it; then length array
+
+
+Start(3):
+	paths = 0
+			1
+			2
+
+Iterating 1
+	paths = 0, 1
+			0, 2
+			1, 0
+			...
+Iterating 2
+	paths = 0, 1, 2
+			0, 2, 1
+			1, 0, 2
+			...
+
+Go through each path and add costs
+for(i : paths)
+	for
+		add
+	if total < min, min = total
+
+
