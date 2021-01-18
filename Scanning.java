@@ -30,9 +30,40 @@ public class Scanning {
       }
 
     for (int i = 0; i < distances.length; i++) {
-      for (int k = 0; k < distances[i].length; k++) {
-        System.out.println(distances[i][k]);
-      }
+      System.out.println(Arrays.toString(distances[i]));
     }
   }
 }
+
+// 
+// cities = {A, B, C, D}
+// distance[0] = A
+//
+// distance[][] =
+//    A      B       C      D
+//
+// A  0      5      3       8
+//
+// B  5      0      7       9
+//
+// C  3      7      0       6
+//
+// D  8      9      6       0
+//
+//
+//
+// A --> B --> C --> D
+// A B D C
+// A C D B
+//
+// A --> B
+// A --> C
+// A --> D
+//
+// D -->
+//
+// int total = 0;
+// total += 5;
+// total += 7;
+//
+// int min = 09821387;
