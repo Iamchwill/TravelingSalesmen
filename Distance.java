@@ -3,8 +3,13 @@ import java.io.*;
 
 public class Distance {
   public static void main(String[] args) throws FileNotFoundException {
-    Scanner in = new Scanner(new File("cities.txt"));
-    ArrayList<String> cities = new ArrayList<>(); //result
+    ArrayList<String> cities = findCities("cities.txt");
+    int[][] distances = arrayifyDistances(cities, "cities.txt");
+  }
+
+  public static ArrayList<String> findCities(String filename) throws FileNotFoundException {
+    Scanner in = new Scanner(new File(filename));
+    ArrayList<String> cities = new ArrayList<String>();
 
     while(in.hasNextLine()) {
       Scanner column = new Scanner(in.nextLine());
@@ -16,9 +21,13 @@ public class Distance {
       if(!cities.contains(to)) cities.add(to);
     }
 
+    return cities;
+  }
+
+  public static int[][] arrayifyDistances(ArrayList<String> cities, String filename) throws FileNotFoundException {
     int[][] distances = new int[cities.size()][cities.size()];
 
-    Scanner scan2 = new Scanner(new File("cities.txt"));
+    Scanner scan2 = new Scanner(new File(filename));
     while (scan2.hasNextLine()) {
       String lineScan2 = scan2.nextLine();
 
@@ -31,5 +40,7 @@ public class Distance {
                 [cities.indexOf(sentenceToArray[0])]
                 = Integer.parseInt(sentenceToArray[4]);
     }
+
+    return distances;
   }
 }
