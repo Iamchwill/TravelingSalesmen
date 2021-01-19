@@ -1,0 +1,4 @@
+Ziti to Farfalle = 20
+Farfalle to Spaghetti = 20
+Spaghetti to Linguini = 20
+Linguini to Rigatoni = 20
