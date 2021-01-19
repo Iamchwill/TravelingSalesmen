@@ -5,7 +5,7 @@ public class Distance {
   public static void main(String[] args) throws FileNotFoundException {
     ArrayList<String> cities = findCities("cities.txt");
     int[][] distances = arrayifyDistances(cities, "cities.txt");
-    System.out.println(allpaths());
+    //System.out.println(allpaths());
   }
 
   public static ArrayList<String> findCities(String filename) throws FileNotFoundException {
@@ -44,29 +44,30 @@ public class Distance {
     return distances;
   }
 
-  public static ArrayList<ArrayList<Integer>> allpaths() throws FileNotFoundException { //initializing
+  public static ArrayList<ArrayList<Integer>> allpaths() throws FileNotFoundException { 
     ArrayList<String> cities = findCities("cities.txt");
     ArrayList<ArrayList<Integer>> paths = new ArrayList<>();
     for(int i = 0; i < cities.size(); i++) {
       ArrayList<Integer> start = new ArrayList<>();
       start.add(i);
-      paths.add(start);
+      paths.add(start); //when u print paths: [0], [1], [2]... (length of cities.size())
     }
 
-    while(paths.get(0).size() < cities.size()) {
-      ArrayList<ArrayList<Integer>> morepaths = new ArrayList<>();
-      for(ArrayList<Integer> i : paths) {
-        for(int j = 0; j < cities.size(); j++) {
-          if(!i.contains(j)) {
-            ArrayList<Integer> newpath = (ArrayList<Integer>) i.clone();
-            newpath.add(j); 
-            morepaths.add(newpath);
+    while(paths.get(0).size() < cities.size()) { //since [0] only has one city n not all, we have to continue n add
+      ArrayList<ArrayList<Integer>> morepaths = new ArrayList<>(); // i created a new array to add more paths bc multiple paths start at [0]... [1]... [2]...
+      for(ArrayList<Integer> i : paths) { //for each path
+        for(int j = 0; j < cities.size(); j++) { //we go through the list of cities
+          if(!i.contains(j)) { //if the path does not contain a city
+            ArrayList<Integer> newpath = (ArrayList<Integer>) i.clone(); //clone the path. rn its [0]
+            newpath.add(j); //add the city to it --> [0,1]
+            morepaths.add(newpath); //add this path to the new array n itll keep doing this until theres [0,1] [0,2] [0,3]... [1,0], [1,2]... 
+            //then it goes back to while loop n adds more cities until all cities r in the path
           }
         }
       }
-      paths = morepaths;
+      paths = morepaths; //replace the original path arraylist to the new arraylist (have to do this bc morepaths is in a while loop so i cant just return it)
     }
-    return paths;
+    return paths; //all paths:) hope u guys understand bc i need to studyy
   }
 }
 
