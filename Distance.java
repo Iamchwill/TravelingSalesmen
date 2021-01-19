@@ -5,7 +5,7 @@ public class Distance {
   public static void main(String[] args) throws FileNotFoundException {
     ArrayList<String> cities = findCities("cities.txt");
     int[][] distances = arrayifyDistances(cities, "cities.txt");
-    //System.out.println(paths());
+    System.out.println(allpaths());
   }
 
   public static ArrayList<String> findCities(String filename) throws FileNotFoundException {
@@ -44,7 +44,7 @@ public class Distance {
     return distances;
   }
 
-  public static ArrayList<ArrayList<Integer>> paths() throws FileNotFoundException { //initializing
+  public static ArrayList<ArrayList<Integer>> allpaths() throws FileNotFoundException { //initializing
     ArrayList<String> cities = findCities("cities.txt");
     ArrayList<ArrayList<Integer>> paths = new ArrayList<>();
     for(int i = 0; i < cities.size(); i++) {
@@ -52,10 +52,27 @@ public class Distance {
       start.add(i);
       paths.add(start);
     }
+
+    while(paths.get(0).size() < cities.size()) {
+      ArrayList<ArrayList<Integer>> morepaths = new ArrayList<>();
+      for(ArrayList<Integer> i : paths) {
+        for(int j = 0; j < cities.size(); j++) {
+          if(!i.contains(j)) {
+            ArrayList<Integer> newpath = (ArrayList<Integer>) i.clone();
+            newpath.add(j); 
+            morepaths.add(newpath);
+          }
+        }
+      }
+      paths = morepaths;
+    }
     return paths;
   }
-
 }
+
+
+
+
 
 
 
