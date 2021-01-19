@@ -9,9 +9,7 @@ public class Distance {
 
     ArrayList<ArrayList<Integer>> permutations = allpaths(cities);
 
-    // for (int i = 0; i < permutations.size(); i++) {
-    //   System.out.println(permutations.get(i));
-    // }
+    
   }
 
   public static ArrayList<String> findCities(String filename) throws FileNotFoundException {
@@ -75,11 +73,16 @@ public class Distance {
     return paths; //all paths:) hope u guys understand bc i need to studyy
   }
 
+  //uses matrix generated from arrayifyDistances to find distance between 2 cities
+  public static int cityDistance(int city1, int city2, int[][] matrix) {
+    return matrix[city1][city2];
+  }
+
   //given an ArrayList of an ArrayList with the cities' permutations
   //and a matrix containing the distances between every city
   //find the total distance of each permutation
   //and keep track (and return) the smallest distance
   public static int smollestDistance(ArrayList<ArrayList<Integer>> permutations, int[][] distances) {
-    return 0; //temporary for now
+    return 0;
   }
 }
