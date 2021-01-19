@@ -4,8 +4,14 @@ import java.io.*;
 public class Distance {
   public static void main(String[] args) throws FileNotFoundException {
     ArrayList<String> cities = findCities("cities.txt");
+
     int[][] distances = arrayifyDistances(cities, "cities.txt");
-    //System.out.println(allpaths());
+
+    ArrayList<ArrayList<Integer>> permutations = allpaths(cities);
+
+    // for (int i = 0; i < permutations.size(); i++) {
+    //   System.out.println(permutations.get(i));
+    // }
   }
 
   public static ArrayList<String> findCities(String filename) throws FileNotFoundException {
@@ -44,49 +50,7 @@ public class Distance {
     return distances;
   }
 
-<<<<<<< HEAD
-}
-
-
-// Start(3):
-//   paths = [0]
-//       [1]
-//       [2]
-//   ArrayList<ArrayList<Integer>> paths
-//   for(int i = 0; i < cities.size(); i++)
-//     ArrayList<Integer> apath
-//     apath.add(i)
-//     paths.add(apath)
-//
-//
-// while(path.get(0)).size() < cities.size()
-// Iterating 1
-//   paths = [0, 1]
-//       [0, 2]
-//       [1, 0]
-//       [1, 2]
-//       ...
-//   for(ArrayLists in ArrayList<ArrayList> paths)
-//     for(int i = 0; i < cities.size(); i++)
-//       if(ArrayList doesn't contain i)
-//         add i
-//
-//
-// Iterating 2
-//   paths = [0, 1, 2]
-//       [0, 2, 1]
-//       [1, 0, 2]
-//       [1, 2, 0]
-//       ...
-//
-// Go through each path and add costs
-// for(i : paths)
-//   for
-//     add
-//   if total < min, min = total
-=======
-  public static ArrayList<ArrayList<Integer>> allpaths() throws FileNotFoundException { 
-    ArrayList<String> cities = findCities("cities.txt");
+  public static ArrayList<ArrayList<Integer>> allpaths(ArrayList<String> cities) throws FileNotFoundException {
     ArrayList<ArrayList<Integer>> paths = new ArrayList<>();
     for(int i = 0; i < cities.size(); i++) {
       ArrayList<Integer> start = new ArrayList<>();
@@ -101,7 +65,7 @@ public class Distance {
           if(!i.contains(j)) { //if the path does not contain a city
             ArrayList<Integer> newpath = (ArrayList<Integer>) i.clone(); //clone the path. rn its [0]
             newpath.add(j); //add the city to it --> [0,1]
-            morepaths.add(newpath); //add this path to the new array n itll keep doing this until theres [0,1] [0,2] [0,3]... [1,0], [1,2]... 
+            morepaths.add(newpath); //add this path to the new array n itll keep doing this until theres [0,1] [0,2] [0,3]... [1,0], [1,2]...
             //then it goes back to while loop n adds more cities until all cities r in the path
           }
         }
@@ -110,12 +74,12 @@ public class Distance {
     }
     return paths; //all paths:) hope u guys understand bc i need to studyy
   }
+
+  //given an ArrayList of an ArrayList with the cities' permutations
+  //and a matrix containing the distances between every city
+  //find the total distance of each permutation
+  //and keep track (and return) the smallest distance
+  public static int smollestDistance(ArrayList<ArrayList<Integer>> permutations, int[][] distances) {
+    return 0; //temporary for now
+  }
 }
-
-
-
-
-
-
-
->>>>>>> 078fcd730b63815c21fcf11df07c8e2041a684bb
