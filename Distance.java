@@ -9,7 +9,8 @@ public class Distance {
 
     ArrayList<ArrayList<Integer>> permutations = allpaths(cities);
 
-    System.out.println(smollestDistance(permutations, distances));
+    System.out.println("The smallest distance is "
+                        + smollestDistance(permutations, distances));
   }
 
   public static ArrayList<String> findCities(String filename) throws FileNotFoundException {
