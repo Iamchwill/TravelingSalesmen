@@ -1,5 +1,11 @@
 # TravelingSalesmen
 
+Xiaoshen Ma
+William Chen
+Tami Takada
+Viana Lin
+Yaying Liang Li
+
 Scanner to find the number of cities;
 
 Parsing:
