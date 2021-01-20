@@ -74,11 +74,6 @@ public class Distance {
     return paths; //all paths:) hope u guys understand bc i need to studyy
   }
 
-  //uses matrix generated from arrayifyDistances to find distance between 2 cities
-  public static int cityDistance(int city1, int city2, int[][] matrix) {
-    return matrix[city1][city2];
-  }
-
   //given an ArrayList of an ArrayList with the cities' permutations
   //and a matrix containing the distances between every city
   //find the total distance of each permutation
@@ -88,7 +83,7 @@ public class Distance {
     for (int i = 0; i < permutations.size(); i++) {
       int total = 0;
       for (int j = 0; j < permutations.get(i).size()-1; j++) {
-        total += cityDistance(permutations.get(i).get(j), permutations.get(i).get(j+1), distances);
+        total += distances[permutations.get(i).get(j)][permutations.get(i).get(j+1)];
       }
       if (total < min) min = total;
     }
