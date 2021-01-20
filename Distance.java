@@ -16,15 +16,13 @@ public class Distance {
   public static ArrayList<String> findCities(String filename) throws FileNotFoundException {
     Scanner in = new Scanner(new File(filename));
     ArrayList<String> cities = new ArrayList<String>();
+    ArrayList<Integer> distances = new ArrayList<Integer> ();
 
     while(in.hasNextLine()) {
-      Scanner column = new Scanner(in.nextLine());
-      String from = column.next();
-      column.next();
-      String to = column.next();
-
-      if(!cities.contains(from)) cities.add(from);
-      if(!cities.contains(to)) cities.add(to);
+      String line = in.nextLine();
+      String[] places = line.split(" = ")[0].split(" to ");
+      if(!cities.contains(places[0])) cities.add(places[0]);
+      if(!cities.contains(places[1])) cities.add(places[1]);
     }
     return cities;
   }
