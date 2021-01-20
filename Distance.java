@@ -2,52 +2,64 @@ import java.util.*;
 import java.io.*;
 
 public class Distance {
+  private static ArrayList<String> cities = new ArrayList<String>();
+
   public static void main(String[] args) throws FileNotFoundException {
-    ArrayList<String> cities = findCities("cities.txt");
+    ArrayList<ArrayList<Integer>> distances = getDistanceArr("cities.txt");
 
-    int[][] distances = arrayifyDistances(cities, "cities.txt");
-
-    ArrayList<ArrayList<Integer>> permutations = allpaths(cities);
+    ArrayList<ArrayList<Integer>> permutations = allpaths();
 
     System.out.println("The smallest distance is "
                         + smollestDistance(permutations, distances));
   }
 
-  public static ArrayList<String> findCities(String filename) throws FileNotFoundException {
+  public static ArrayList<ArrayList<Integer>> getDistanceArr(String filename) throws FileNotFoundException {
     Scanner in = new Scanner(new File(filename));
-    ArrayList<String> cities = new ArrayList<String>();
-    ArrayList<Integer> distances = new ArrayList<Integer> ();
+    cities = new ArrayList<String>();
+    ArrayList<ArrayList<Integer>> distances = new ArrayList<ArrayList<Integer>>();
 
     while(in.hasNextLine()) {
       String line = in.nextLine();
       String[] places = line.split(" = ")[0].split(" to ");
-      if(!cities.contains(places[0])) cities.add(places[0]);
-      if(!cities.contains(places[1])) cities.add(places[1]);
+
+      int index = 0;
+      if(!cities.contains(places[0])) {
+        cities.add(places[0]);
+        index = distances.size();
+        distances.add(new ArrayList<Integer>());
+      } else index = cities.indexOf(places[0]);
+
+      int indexTwo = 0;
+      if(!cities.contains(places[1])) {
+        cities.add(places[1]);
+        indexTwo = distances.size();
+        distances.add(new ArrayList<Integer>());
+      } else indexTwo = cities.indexOf(places[1]);
+
+      int dist = Integer.valueOf(line.split(" = ")[1]);
+      ArrayList<Integer> placeZeroDists = distances.get(index);
+      ArrayList<Integer> placeOneDists = distances.get(indexTwo);
+
+      if (placeZeroDists.size() <= indexTwo) {
+        for (int i = placeZeroDists.size(); i < indexTwo; i++) {
+          placeZeroDists.add(0);
+        }
+        placeZeroDists.add(dist);
+      } else placeZeroDists.set(indexTwo, dist);
+
+      if (placeOneDists.size() <= index) {
+        for (int i = placeOneDists.size(); i < index; i++) {
+          placeOneDists.add(0);
+        }
+        placeOneDists.add(dist);
+      } else placeOneDists.set(index, dist);
     }
-    return cities;
-  }
 
-  public static int[][] arrayifyDistances(ArrayList<String> cities, String filename) throws FileNotFoundException {
-    int[][] distances = new int[cities.size()][cities.size()];
-
-    Scanner scan2 = new Scanner(new File(filename));
-    while (scan2.hasNextLine()) {
-      String lineScan2 = scan2.nextLine();
-
-      String[] sentenceToArray = lineScan2.split(" ");
-
-      distances[cities.indexOf(sentenceToArray[0])]
-                [cities.indexOf(sentenceToArray[2])]
-                = Integer.parseInt(sentenceToArray[4]);
-      distances[cities.indexOf(sentenceToArray[2])]
-                [cities.indexOf(sentenceToArray[0])]
-                = Integer.parseInt(sentenceToArray[4]);
-    }
-
+    distances.get(cities.size() - 1).add(0);
     return distances;
   }
 
-  public static ArrayList<ArrayList<Integer>> allpaths(ArrayList<String> cities) throws FileNotFoundException {
+  public static ArrayList<ArrayList<Integer>> allpaths() throws FileNotFoundException {
     ArrayList<ArrayList<Integer>> paths = new ArrayList<>();
     for(int i = 0; i < cities.size(); i++) {
       ArrayList<Integer> start = new ArrayList<>();
@@ -76,12 +88,12 @@ public class Distance {
   //and a matrix containing the distances between every city
   //find the total distance of each permutation
   //and keep track (and return) the smallest distance
-  public static int smollestDistance(ArrayList<ArrayList<Integer>> permutations, int[][] distances) {
+  public static int smollestDistance(ArrayList<ArrayList<Integer>> permutations, ArrayList<ArrayList<Integer>> distances) {
     int min = Integer.MAX_VALUE;
     for (int i = 0; i < permutations.size(); i++) {
       int total = 0;
       for (int j = 0; j < permutations.get(i).size()-1; j++) {
-        total += distances[permutations.get(i).get(j)][permutations.get(i).get(j+1)];
+        total += distances.get(permutations.get(i).get(j)).get(permutations.get(i).get(j+1));
       }
       if (total < min) min = total;
     }
