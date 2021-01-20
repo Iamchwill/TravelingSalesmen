@@ -1,10 +1,9 @@
 # TravelingSalesmen
 
 Scanner to find the number of cities;
-Mathematical method:
 
 Parsing:
-if city isn't in array, add it; then length array
+if city isn't in array, add it; then length array gives you number of cities;
 
 
 Start(3):
